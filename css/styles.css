@@ -4,35 +4,56 @@
   box-sizing: border-box;
 }
 
+:root {
+  --header-color: #2c3e50;
+  --aside-color: #34495e;
+  --main-content-color: #ecf0f1;
+  --accent-color: rgb(0, 164, 164);
+}
+
 .container {
   display: grid;
   grid-template-columns: 1fr 4fr;
   grid-template-rows: 1fr 6.5fr;
 }
 header {
-  background-color: red;
+  background-color: var(--header-color);
   grid-column: 1 / 3;
   grid-row: 1 / 2;
   height: 100px;
   padding: 10px;
+  color: var(--main-content-color);
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding-left: 25px;
 }
 
+.logo,
+.form-logo {
+  filter: invert(90%);
+}
+.form-logo {
+  align-self: center;
+}
 aside {
-  background-color: blue;
+  background-color: var(--aside-color);
   grid-column: 1 / 2;
   grid-row: 2 / 4;
   padding: 20px;
   display: flex;
   flex-direction: column;
   gap: 40px;
+  color: var(--main-content-color);
 }
 
 main {
-  background-color: yellow;
+  background-color: var(--main-content-color);
   grid-column: 2 / 3;
   grid-row: 2 / 4;
   padding: 20px;
   display: grid;
+  font-size: 2rem;
 }
 
 .grid {
@@ -42,7 +63,7 @@ main {
   height: fit-content;
   width: fit-content;
   justify-self: center;
-  border: 5px solid red;
+  border: 1px solid black;
 }
 
 .cell {
@@ -50,6 +71,16 @@ main {
   width: 100px;
   height: 100px;
   background-color: white;
+  display: grid;
+  place-content: center;
+}
+
+.cell:hover {
+  color: #ecf0f1;
+  background-color: var(--accent-color);
+  cursor: pointer;
+  transform: scale(1.1);
+  transition: transform 0.3s ease;
 }
 
 .form {
@@ -57,20 +88,63 @@ main {
   padding: 20px;
   border: 1px solid white;
   gap: 5px;
+  border-radius: 8px;
 }
 
 .form > button {
-  width: 25%;
+  width: 50%;
   justify-self: center;
   margin-top: 20px;
+  padding: 10px 5px;
 }
 
 .scores {
-  display: flex;
-  justify-content: space-around;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  justify-items: center;
+}
+
+.next-round-container {
+  grid-column: 2/3;
+  align-self: center;
 }
 
 .reset {
-  width: 90px;
+  width: 160px;
   align-self: center;
+  padding: 10px 10px;
+  font-weight: bold;
+}
+
+input {
+  border: 2px solid var(--accent-color);
+  border-radius: 8px;
+  padding: 8px 12px;
+  outline: none;
+}
+
+button {
+  outline: none;
+  border: 2px solid var(--accent-color);
+  border-radius: 10px;
+  font-weight: bold;
+  display: grid;
+  place-content: center;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+button:hover {
+  border: 2px solid var(--main-content-color);
+  background-color: var(--accent-color);
+  color: var(--main-content-color);
+}
+
+button:disabled {
+  background-color: gray;
+  color: #fff;
+}
+
+.next-round {
+  padding: 10px 20px;
 }

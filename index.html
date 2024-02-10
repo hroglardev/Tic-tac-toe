@@ -4,28 +4,34 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="./css/styles.css" />
-    <script type="module" src="./js/index.mjs" defer></script>
+    <script type="module" src="./js/algo.mjs" defer></script>
     <title>Tic tac toe</title>
   </head>
   <body>
     <div class="container">
-      <header>SOY EL HEADER</header>
+      <header>
+        <img class="logo" src="./public/tic-tac-toe-game-svgrepo-com.svg" width="50px" alt="" />
+        <h1>Tic Tac Toe</h1>
+      </header>
       <main id="game-board">
         <div class="scores">
           <p class="player one">Player 1: 0</p>
+          <p class="round-winner"></p>
           <p class="player two">Player 2: 0</p>
+          <div class="next-round-container"></div>
         </div>
         <div class="grid"></div>
       </main>
       <aside>
         <form action="" class="form" novalidate>
-          <label for="">Player 1: X</label>
-          <input type="text" id="player-one" />
-          <label for="">Player 2: O</label>
-          <input type="text" id="player-two" />
+          <label for="player-one">Player 1: X</label>
+          <input type="text" id="player-one" name="player-one" placeholder="Lucas" />
+          <label for="player-two">Player 2: O</label>
+          <input type="text" id="player-two" name="player-two" placeholder="Mariano" />
           <button class="start" type="submit" disabled>Start</button>
         </form>
         <button class="reset">Reset Game</button>
+        <img class="form-logo" src="./public/tic-tac-toe-svgrepo-com.svg" width="200px" alt="" />
       </aside>
     </div>
   </body>

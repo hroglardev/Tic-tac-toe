@@ -121,6 +121,9 @@ const gameModule = (() => {
       updateCurrentPlayer()
       console.log(currentPlayer)
       renderBoard()
+      const isWinner = checkIfWin()
+      if (isWinner) {
+      }
     }
 
     return { getBoard, makeMove, restartBoard, renderBoard }
@@ -129,6 +132,30 @@ const gameModule = (() => {
   const updateCurrentPlayer = () => {
     currentPlayer = currentPlayer === playerOne ? playerTwo : playerOne
   }
+
+  const checkIfWin = () => {
+    const board = Gameboard.getBoard()
+
+    for (let i = 0; i < board.length; i += 3) {
+      if (board[i] !== null && board[i] === board[i + 1] && board[i] === board[i + 2]) {
+        return true
+      }
+    }
+
+    for (let i = 0; i < 3; i++) {
+      if (board[i] !== null && board[i] === board[i + 3] && board[i] === board[i + 6]) {
+        return true
+      }
+    }
+
+    if (board[0] !== null && board[0] === board[4] && board[0] === board[8]) {
+      return true
+    }
+
+    if (board[2] !== null && board[2] === board[4] && board[2] === board[6]) {
+      return true
+    }
+    return false
+  }
   console.log(Gameboard.getBoard())
-  Gameboard.renderBoard()
 })()
