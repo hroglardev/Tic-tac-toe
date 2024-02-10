@@ -8,7 +8,25 @@
     <title>Tic tac toe</title>
   </head>
   <body>
-      <main id="game-board"></main>
+    <div class="container">
+      <header>SOY EL HEADER</header>
+      <main id="game-board">
+        <div class="scores">
+          <p class="player one">Player 1: 0</p>
+          <p class="player two">Player 2: 0</p>
+        </div>
+        <div class="grid"></div>
+      </main>
+      <aside>
+        <form action="" class="form" novalidate>
+          <label for="">Player 1: X</label>
+          <input type="text" id="player-one" />
+          <label for="">Player 2: O</label>
+          <input type="text" id="player-two" />
+          <button class="start" type="submit" disabled>Start</button>
+        </form>
+        <button class="reset">Reset Game</button>
+      </aside>
     </div>
   </body>
 </html>
