@@ -7,7 +7,8 @@ const gameModule = (() => {
     const getSymbol = () => symbol
     const getScore = () => score
     const updateScore = () => (score += 1)
-    return { getName, getSymbol, getScore, updateScore }
+    const resetScore = () => (score = 0)
+    return { getName, getSymbol, getScore, updateScore, resetScore }
   }
 
   // 2ND MODULE
@@ -47,6 +48,13 @@ const gameModule = (() => {
       setPlayers('Player 1', 'Player 2')
     }
 
+    const resetScores = () => {
+      playerOne.resetScore()
+      playerTwo.resetScore()
+      domScore.displayScores()
+      domScore.clearUi()
+    }
+
     const boardIsfull = () => {
       return board.every((cell) => cell !== null)
     }
@@ -75,7 +83,7 @@ const gameModule = (() => {
       return false
     }
 
-    return { boardIsfull, getCurrentPlayer, resetPlayers, getBoard, makeMove, restartBoard, checkIfWin, updateCurrentPlayer, getPlayerOne, getPlayerTwo, setPlayers }
+    return { resetScores, boardIsfull, getCurrentPlayer, resetPlayers, getBoard, makeMove, restartBoard, checkIfWin, updateCurrentPlayer, getPlayerOne, getPlayerTwo, setPlayers }
   })()
 
   // 3RD MODULE
@@ -115,21 +123,29 @@ const gameModule = (() => {
 
   const domGameboard = (() => {
     const resetButton = document.querySelector('.reset')
+    const resetScoresButton = document.querySelector('.rounds')
+    const grid = document.querySelector('.grid')
 
     const renderBoard = () => {
-      const grid = document.querySelector('.grid')
       const board = Gameboard.getBoard()
       grid.innerHTML = ''
+
       board.forEach((symbol, index) => {
         const cell = document.createElement('div')
         cell.classList.add('cell')
         cell.id = index
         cell.innerText = symbol
         grid.appendChild(cell)
-        if (symbol === null) {
-          cell.addEventListener('click', () => fillCell(index))
-        }
       })
+    }
+
+    const handleCellClick = (event) => {
+      const clickedCell = event.target
+      const index = clickedCell.id
+
+      if (clickedCell.classList.contains('cell') && Gameboard.getBoard()[index] === null) {
+        fillCell(index)
+      }
     }
 
     const fillCell = (index) => {
@@ -138,12 +154,6 @@ const gameModule = (() => {
       Gameboard.updateCurrentPlayer()
       domScore.declareWinner()
       renderBoard()
-    }
-
-    const paintWinningCells = (cells) => {
-      cells.forEach((cell) => {
-        cell.classList.add('winning-cell')
-      })
     }
 
     const startGame = (event) => {
@@ -173,16 +183,18 @@ const gameModule = (() => {
     }
 
     const removeEventListeners = () => {
-      const cells = [...document.querySelectorAll('.cell')]
-      cells.forEach((cell) => {
-        cell.removeEventListener('click', fillCell)
-      })
-      console.log('EJECUTO REMOVE EVENTS')
+      grid.removeEventListener('click', handleCellClick)
     }
 
+    const addEventListeners = () => {
+      grid.addEventListener('click', handleCellClick)
+    }
+
+    addEventListeners()
     resetButton.addEventListener('click', resetGame)
+    resetScoresButton.addEventListener('click', Gameboard.resetScores)
     domForm.form.addEventListener('submit', (event) => startGame(event))
-    return { renderBoard, removeEventListeners }
+    return { renderBoard, removeEventListeners, addEventListeners }
   })()
 
   const domScore = (() => {
@@ -218,8 +230,8 @@ const gameModule = (() => {
         winner.innerText = `${currentPlayer.getName()} is the winner`
         currentPlayer.updateScore()
         displayScores()
-        addNextRoundButton()
         domGameboard.removeEventListeners()
+        addNextRoundButton()
       }
     }
 
@@ -232,6 +244,7 @@ const gameModule = (() => {
       Gameboard.restartBoard()
       domGameboard.renderBoard()
       winner.innerText = ''
+      domGameboard.addEventListeners()
       nextRoundButton.remove()
     }
 
