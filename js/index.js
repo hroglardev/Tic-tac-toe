@@ -39,13 +39,14 @@ const gameModule = (() => {
     }
 
     const setPlayers = (firstPlayerName, secondPlayerName) => {
-      playerOne = Player(firstPlayerName, 'X', 0)
-      playerTwo = Player(secondPlayerName, 'O', 0)
+      playerOne = Player(firstPlayerName, 'X', playerOne.getScore())
+      playerTwo = Player(secondPlayerName, 'O', playerTwo.getScore())
       currentPlayer = playerOne
     }
 
     const resetPlayers = () => {
       setPlayers('Player 1', 'Player 2')
+      resetScores()
     }
 
     const resetScores = () => {
@@ -62,25 +63,25 @@ const gameModule = (() => {
     const checkIfWin = () => {
       for (let i = 0; i < board.length; i += 3) {
         if (board[i] !== null && board[i] === board[i + 1] && board[i] === board[i + 2]) {
-          return true
+          return [i, i + 1, i + 2]
         }
       }
 
       for (let i = 0; i < 3; i++) {
         if (board[i] !== null && board[i] === board[i + 3] && board[i] === board[i + 6]) {
-          return true
+          return [i, i + 3, i + 6]
         }
       }
 
       if (board[0] !== null && board[0] === board[4] && board[0] === board[8]) {
-        return true
+        return [0, 4, 8]
       }
 
       if (board[2] !== null && board[2] === board[4] && board[2] === board[6]) {
-        return true
+        return [2, 4, 6]
       }
 
-      return false
+      return null
     }
 
     return { resetScores, boardIsfull, getCurrentPlayer, resetPlayers, getBoard, makeMove, restartBoard, checkIfWin, updateCurrentPlayer, getPlayerOne, getPlayerTwo, setPlayers }
@@ -127,6 +128,7 @@ const gameModule = (() => {
     const grid = document.querySelector('.grid')
 
     const renderBoard = () => {
+      const checkIfWin = Gameboard.checkIfWin()
       const board = Gameboard.getBoard()
       grid.innerHTML = ''
 
@@ -137,6 +139,13 @@ const gameModule = (() => {
         cell.innerText = symbol
         grid.appendChild(cell)
       })
+
+      if (checkIfWin !== null) {
+        checkIfWin.forEach((winningCell) => {
+          const cell = document.getElementById(`${winningCell}`)
+          cell.classList.add('winning-cell')
+        })
+      }
     }
 
     const handleCellClick = (event) => {
@@ -158,20 +167,16 @@ const gameModule = (() => {
 
     const startGame = (event) => {
       event.preventDefault()
-      if (Gameboard.getPlayerOne().getName() !== 'Player 1') {
-        resetGame()
-        startGame(event)
-      } else {
-        const firstPlayerInput = document.querySelector('#player-one').value
-        const secondPlayerInput = document.querySelector('#player-two').value
 
-        Gameboard.setPlayers(firstPlayerInput, secondPlayerInput)
-        Gameboard.restartBoard()
+      const firstPlayerInput = document.querySelector('#player-one').value
+      const secondPlayerInput = document.querySelector('#player-two').value
 
-        domScore.displayScores()
+      Gameboard.setPlayers(firstPlayerInput, secondPlayerInput)
+      Gameboard.restartBoard()
 
-        domForm.resetForm()
-      }
+      domScore.displayScores()
+
+      domForm.resetForm()
     }
 
     const resetGame = () => {
@@ -217,14 +222,14 @@ const gameModule = (() => {
       const isDraw = Gameboard.boardIsfull()
 
       let currentPlayer = Gameboard.getCurrentPlayer()
-      if (!isWinner && isDraw) {
+      if (isWinner === null && isDraw) {
         winner.innerText = "It's a tie"
         Gameboard.updateCurrentPlayer()
         addNextRoundButton()
         domGameboard.removeEventListeners()
         return
       }
-      if (isWinner) {
+      if (isWinner !== null) {
         Gameboard.updateCurrentPlayer()
         currentPlayer = Gameboard.getCurrentPlayer()
         winner.innerText = `${currentPlayer.getName()} is the winner`

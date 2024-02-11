@@ -14,8 +14,10 @@
 .container {
   display: grid;
   grid-template-columns: 1fr 4fr;
-  grid-template-rows: 1fr 6.5fr;
+  grid-template-rows: auto 1fr 1fr;
+  min-height: 100vh;
 }
+
 header {
   background-color: var(--header-color);
   grid-column: 1 / 3;
@@ -39,7 +41,7 @@ header {
 aside {
   background-color: var(--aside-color);
   grid-column: 1 / 2;
-  grid-row: 2 / 4;
+  grid-row: 2 / span end;
   padding: 20px;
   display: flex;
   flex-direction: column;
@@ -50,7 +52,7 @@ aside {
 main {
   background-color: var(--main-content-color);
   grid-column: 2 / 3;
-  grid-row: 2 / 4;
+  grid-row: 2 / span end;
   padding: 20px;
   display: grid;
   font-size: 2rem;
@@ -83,6 +85,10 @@ main {
   transition: transform 0.3s ease;
 }
 
+.winning-cell {
+  background-color: var(--accent-color);
+}
+
 .form {
   display: grid;
   padding: 20px;
@@ -92,7 +98,6 @@ main {
 }
 
 .form > button {
-  width: 50%;
   justify-self: center;
   margin-top: 20px;
   padding: 10px 5px;
@@ -107,14 +112,6 @@ main {
 .next-round-container {
   grid-column: 2/3;
   align-self: center;
-}
-
-.reset,
-.rounds {
-  width: 160px;
-  align-self: center;
-  padding: 10px 10px;
-  font-weight: bold;
 }
 
 input {
@@ -149,4 +146,17 @@ button:disabled {
 
 .next-round {
   padding: 10px 20px;
+  position: absolute;
+  top: 30%;
+  left: 60%;
+  transform: translate(-50%, -50%);
+}
+
+.reset,
+.rounds,
+.start {
+  width: 160px;
+  align-self: center;
+  padding: 10px 10px;
+  font-weight: bold;
 }
