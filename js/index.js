@@ -56,7 +56,7 @@ const gameModule = (() => {
       domScore.clearUi()
     }
 
-    const boardIsfull = () => {
+    const boardIsFull = () => {
       return board.every((cell) => cell !== null)
     }
 
@@ -84,7 +84,7 @@ const gameModule = (() => {
       return null
     }
 
-    return { resetScores, boardIsfull, getCurrentPlayer, resetPlayers, getBoard, makeMove, restartBoard, checkIfWin, updateCurrentPlayer, getPlayerOne, getPlayerTwo, setPlayers }
+    return { resetScores, boardIsFull, getCurrentPlayer, resetPlayers, getBoard, makeMove, restartBoard, checkIfWin, updateCurrentPlayer, getPlayerOne, getPlayerTwo, setPlayers }
   })()
 
   // 3RD MODULE
@@ -219,7 +219,7 @@ const gameModule = (() => {
 
     const declareWinner = () => {
       const isWinner = Gameboard.checkIfWin()
-      const isDraw = Gameboard.boardIsfull()
+      const isDraw = Gameboard.boardIsFull()
 
       let currentPlayer = Gameboard.getCurrentPlayer()
       if (isWinner === null && isDraw) {
