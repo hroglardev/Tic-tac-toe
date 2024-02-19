@@ -20,7 +20,7 @@ This tic-tac-toe project introduced me to using modules and IIFE to abstract dif
 
 # Want to see it in action?
 
-<a href="https://hroglardev.github.io/Library/" target="_blank">Click here</a>
+<a href="https://hroglardev.github.io/Tic-tac-toe/" target="_blank">Click here</a>
 
 # How to use the app.
 
