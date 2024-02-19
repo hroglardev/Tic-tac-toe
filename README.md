@@ -24,27 +24,27 @@ This tic-tac-toe project introduced me to using modules and IIFE to abstract dif
 
 # How to use the app.
 
-<img src="./docs-images/1-fullscreen.JPG"/>
-
 Right from the start the app is fully functional. Player 1 plays "X" symbol and Player 2 plays "O".
 
-<img src="./docs-images/2-firstRound.JPG"/>
+<img src="./docs-images/1-fullscreen.JPG"/>
 
 When either player wins a round or there's a tie, the board becomes non functional and, if there was a winner, the winning line is highlighted. If you wish to play another round, click on the appearing button above the board indicating so.
 
-<img src="./docs-images/3-changeNames.JPG"/>
+<img src="./docs-images/2-firstRound.JPG"/>
 
 If you wish to change the players' names, use the sidebar's form to choose them. The score won't be reset despite changing the names.
+
+<img src="./docs-images/3-changeNames.JPG"/>
+
+You can reset the score of both players by clicking the reset rounds button on the sidebar.
 
 <img src="./docs-images/5-resetRounds.JPG"/>
 
 <img src="./docs-images/6-resetRounds2.JPG"/>
 
-You can reset the score of both players by clicking the reset rounds button on the sidebar.
+If you wish to completely reset the game to default values, make use of the reset game button above the previous reset rounds button.
 
 <img src="./docs-images/ResetGame.JPG"/>
-
-If you wish to completely reset the game to default values, make use of the reset game button above the previous reset rounds button.
 
 # Want to track my progress?
 
