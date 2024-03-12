@@ -63,4 +63,13 @@ Checkout my other projects in order to see my evolution:
   <li><a href="https://github.com/hroglardev/Tic-tac-toe" target="_blank">You are here</a></li>
   <li><a href="https://github.com/hroglardev/Restaurant-page" target="_blank">Restaurant page</a></li>
   <li><a href="https://github.com/hroglardev/To-do-list-js" target="_blank">To-do list</a></li>
+  <li><a href="https://github.com/hroglardev/Weather-app" target="_blank">Weather app</a></li>
+  <li><a href="https://github.com/hroglardev/Battleship" target="_blank">Battleship</a></li>
+  <li><a href="https://github.com/hroglardev/Lucas-Cubile" target="_blank">Portfolio</a></li>
 </ol>
+
+These are all my projects in my basic section of my coding journey. I will continue with it in the React section along with back-end programming.
+
+If you'd like to skip my basic projects and jump straight to the next section, you can jump to it in the following link.
+
+<a href="https://github.com/hroglardev/CV-creator" target="_blank">React - Backend</a>
